@@ -1,6 +1,7 @@
 import React from "react";
 import reactDom from "react-dom";
 import Sketch, { keyPressed } from "react-p5";
+import LineDrawer from "react-p5";
 import { Line } from "react-shapes";
 
 	let x = 50;
@@ -12,6 +13,9 @@ import { Line } from "react-shapes";
     let rows = 30;
     let speedX = 1;
     let speedY = 1;
+    let j = 0;
+    let mapX = 5000
+    let lines = [];
 
 export default (props) => {
 	const setup = (p5, canvasParentRef) => {
@@ -19,13 +23,17 @@ export default (props) => {
 		// use parent to render the canvas in this ref
 		// (without that p5 will render the canvas outside of your component)
         let cnv = p5.createCanvas(1000, 1000).parent(canvasParentRef);
+
+
         cnv.mouseMoved((event) => {
             console.log(event);
             x = event.clientX;
             y = event.clientY;
         })
 
-        console.log(keyPressed());
+        // 
+
+        // console.log(keyPressed());
     };
     
     function keyPressed(key) {
@@ -33,6 +41,10 @@ export default (props) => {
     }
 
 	const draw = (p5) => {
+
+        let x = 0;
+
+
 		p5.background(50);
         p5.ellipse(500, 500, 70, 70);
         
@@ -48,16 +60,64 @@ export default (props) => {
             speedY-=(ballY-y)/100;
         }
 
-        let ax1 = p5.line(1000, 1000-speedY, 0, 1000-speedY);
-        let ax2 = p5.line(1000, 900-speedY, 0, 900-speedY);
-        let ax3 = p5.line(1000, 800-speedY, 0, 800-speedY);
-        let ax4 = p5.line(1000, 700-speedY, 0, 700-speedY);
-        let ax5 = p5.line(1000, 600-speedY, 0, 600-speedY);
-        let ax6 = p5.line(1000, 500-speedY, 0, 500-speedY);
-        let ax7 = p5.line(1000, 400-speedY, 0, 400-speedY);
-        let ax8 = p5.line(1000, 300-speedY, 0, 300-speedY);
-        let ax9 = p5.line(1000, 200-speedY, 0, 200-speedY);
-        let ax10 = p5.line(1000, 100-speedY, 0, 100-speedY);
+
+    let i = 1000;
+    // let line = p5.line(1000, i-speedY, 0, i-speedY);
+    // if ((i - speedY) + 100 <= 1000) {
+    //  while (i - speedY < 1000){
+        lines.push(p5.line(1000, i-speedY, 0, i-speedY));
+        lines.push(p5.line(i-speedX, 0, i-speedX, 1000));
+        // lines.push(p5.line(1000, 700-speedY, 0, 700-speedY));
+        let lin = lines.length - 1;
+        i -= 100;
+    //  }
+    // }
+
+    // let j = 1000;
+    // if ((1000 - (i - speedY)) > 100) {
+    //     while (1000 - (j - speedY) > 100){
+    //         lines.push(p5.line(1000, j-speedY, 0, j-speedY));
+    //         j += 100;
+    //     }
+    // } else if ((i - speedY) > 0){
+    //     while ((j - speedY) > 0){
+    //         lines.push(p5.line(1000, j-speedY, 0, j-speedY));
+    //         j -= 100;
+    //     }
+    // }
+
+
+    let j = 1000;
+    lines.push(p5.line(j-speedX, 0, j-speedX,1000));
+    // if ((1000 - (i - speedX)) < 1000) {
+    //     while (1000 - (j - speedX) < 1000){
+    //         lines.push(p5.line(j-speedX, 0, j-speedX,1000));
+    //         j += 100;
+    //     }
+    // } 
+    // else if ((i - speedY) > 0){
+    //     while ((j - speedY) > 0){
+    //         lines.push(p5.line(1000, j-speedY, 0, j-speedY));
+    //         j -= 100;
+    //     }
+    // }
+
+    
+
+            // let newLine = lines[lin];
+        
+        
+
+
+        // let ax3 = p5.line(1000, 800-speedY, 0, 800-speedY);
+        // let ax4 = p5.line(1000, 700-speedY, 0, 700-speedY);
+        // let ax5 = p5.line(1000, 600-speedY, 0, 600-speedY);
+        // let ax6 = p5.line(1000, 500-speedY, 0, 500-speedY);
+        // let ax7 = p5.line(1000, 400-speedY, 0, 400-speedY);
+        // let ax8 = p5.line(1000, 300-speedY, 0, 300-speedY);
+        // let ax9 = p5.line(1000, 200-speedY, 0, 200-speedY);
+        // let ax10 = p5.line(1000, 100-speedY, 0, 100-speedY);
+        
         
 
         let rect2 = p5.line(1000-speedX, 0, 1000-speedX, 1000);
